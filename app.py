@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, after_this_request
 import subprocess
 import uuid
 import os
@@ -14,7 +14,7 @@ def index():
         output_file = f"output_{uuid.uuid4()}.mp4"
 
         video.save(input_file)
-        
+
         subprocess.run([
             "ffmpeg",
             "-y",
@@ -24,8 +24,18 @@ def index():
             output_file
         ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
 
+        @after_this_request
+        def cleanup(response):
+            try:
+                os.remove(input_file)
+                os.remove(output_file)
+            except Exception:
+                pass
+            return response
 
-        os.remove(input_file)
         return send_file(output_file, as_attachment=True)
 
     return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run()
