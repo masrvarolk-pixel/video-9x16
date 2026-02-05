@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Converter vídeo para 9:16</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  width: 320px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  text-align: center;
+}
+
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h3>Vídeo para 9:16</h3>
+  <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="video" accept="video/*" required>
+    <button type="submit">Converter</button>
+  </form>
+</div>
+
+</body>
+</html>
