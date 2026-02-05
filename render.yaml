@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: video-9x16
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
