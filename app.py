@@ -14,7 +14,7 @@ def index():
         output_file = f"output_{uuid.uuid4()}.mp4"
 
         video.save(input_file)
-
+        
         subprocess.run([
             "ffmpeg",
             "-y",
@@ -22,7 +22,8 @@ def index():
             "-vf", "crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=1080:1920",
             "-preset", "veryfast",
             output_file
-        ], check=True)
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
 
         os.remove(input_file)
         return send_file(output_file, as_attachment=True)
